@@ -17,4 +17,3 @@ int main() {
     printf("The external sum of %d, %d, and %d is %d\n", x, y, z, sum);
 
     return 0;
-}
