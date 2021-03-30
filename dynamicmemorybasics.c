@@ -6,7 +6,7 @@ int main() {
     int *b;
 
     a = (int *) malloc(sizeof(int));
-    b = (int *) malloc(20); // 4 bytes - limit = 15
+    b = (int *) malloc(4); // 4 bytes - limit = 15
 
     *a = 128128;
     *b = 256256;
