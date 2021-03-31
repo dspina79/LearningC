@@ -19,6 +19,17 @@ int * getFibSeries(int *size) {
     return series;
 }
 
+int * analyze(int *arr, int *arrSize) {
+    static int* newSeries;
+    *arrSize  += -1;
+    newSeries = malloc(*arrSize * sizeof(int));
+    for (int i = 0; i < *arrSize; i++) {
+        newSeries[i] = arr[i + 1] - arr[i];
+    }
+
+    return newSeries;
+}
+
 void printSeries(int *series, int size) {
     for (int i = 0; i < size; i++) {
         printf("%d\t", series[i]);
@@ -29,10 +40,18 @@ void printSeries(int *series, int size) {
 
 int main() {
     int size;
+    int originalSize;
     printf("Select the size of the FibArray: ");
     scanf("%d", &size);
     int *fibs = getFibSeries(&size);
+    printf("Original Fibs\n");
     printSeries(fibs, size);
+    originalSize = size;
+    for (int i = 0; i < originalSize -  2; i++) {
+        printf("Iteration %d:\n", i);
+        fibs = analyze(fibs, &size);
+        printSeries(fibs, size);
+    }
 
     return 0;
 }
