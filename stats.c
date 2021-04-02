@@ -1,19 +1,35 @@
 #include <stdio.h>
+#include <stdlib.h>
+#define TRUE 1
 
-float avg(int *, int N);
+float avg(int *, int);
 
 int main() {
-    int arr[1];
+    static int arr[1];
     int x = 0, N = 0;
 
-    while (true) {
+    while (TRUE) {
         printf("Enter a number. Use -1 to exit. >> ");
-        scanf("%d", x);
+        scanf("%d", &x);
         if (x == -1) {
             break;
         }
 
+        N += 1;
+        if (sizeof(arr) < N) {
+            // copy elements to new array
+            int temp[N];
 
+            for (int i = 0; i < sizeof(arr); i++) {
+                temp[i] = arr[i];
+            }
+            realloc(arr, N);
+            free(arr);
+            for (int i = 0; i < sizeof(temp); i++) {
+                arr[i] = temp[i];
+            }
+        }
+        arr[N-1] = x;
     }
 
     if (N == 0) {
@@ -22,8 +38,17 @@ int main() {
     }
 
     // determine the mean
-
+    float mean = avg(arr, N);
+    printf("The average of the values is %f.\n", mean);
     return 0;
 }
 
+float avg(int *x, int N) {
+    int sum = 0;
 
+    for (int i = 0; i < sizeof(*x); i++) {
+        sum += x[i];
+    }
+
+    return ((float)sum) / ((float)N);
+}
