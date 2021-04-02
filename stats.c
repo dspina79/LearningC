@@ -63,10 +63,10 @@ float myStdDev(int *x, int N) {
     float numerator = 0;
 
     for (int i = 0; i < sizeof(x); i++) {
-        numerator = (((float)x[i] - mean) * ((float)x[i] - mean));
+        numerator += (((float)x[i] - mean) * ((float)x[i] - mean));
     }
 
-    float div = numerator / (float)N;
+    float div = (numerator / (float)N);
     
     return sqrt(div);
 }
